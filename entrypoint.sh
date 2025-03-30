@@ -4,6 +4,11 @@ LOCAL_PASSLISTDATA="${COMB_PASSLIST_DATA:-/passlistdata}"
 RAMDISK_DIR="${COMB_RAMDISK_DIR:-/ramdiskdata}"
 RAM_PASSLISTDATA="$RAMDISK_DIR/data"
 
+if [ ! -d "$LOCAL_PASSLISTDATA" ] || [ -z "$(ls -A $LOCAL_PASSLISTDATA)" ]; then
+    echo "[ERROR] Local data directory not found or is empty: $LOCAL_PASSLISTDATA"
+    exit 1
+fi
+
 if [ -d "$RAM_PASSLISTDATA" ]; then
     echo "[INFO] Using RAM disk data directory: $RAM_PASSLISTDATA"
     PASSLISTDATA="$RAM_PASSLISTDATA"
