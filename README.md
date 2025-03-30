@@ -118,6 +118,7 @@ The project includes a `compose.yaml` file that sets up the Flask app and Redis 
 ## To Do:
 * Improve query function (allow searching for passwords)
 * Add REST API
+* Option to load whole COMB dataset into memory on boot, instead of copying it to ramdisk.
 
 ---
 
