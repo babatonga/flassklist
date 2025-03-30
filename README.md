@@ -4,6 +4,8 @@ A web-based search interface for the **Compilation Of Many Breaches** (COMB) dat
 
 The project uses Flask for the web application, Redis for caching and rate limiting, and optional RAM disk support for faster file access. It is containerized with Docker and can be deployed using Docker Compose.
 
+You can find a magnet link for COMB here: https://gist.github.com/fawazahmed0/79764af8a026a9a5b380728e67f786d4
+
 ---
 
 ## Features
@@ -106,6 +108,12 @@ The project includes a `compose.yaml` file that sets up the Flask app and Redis 
 
 - **start.sh:**  
   A script for local development. It sets up the necessary environment variables and starts the Flask app with Gunicorn.
+
+---
+
+## To Do:
+* Improve query function (allow searching for passwords)
+* Add REST API
 
 ---
 
