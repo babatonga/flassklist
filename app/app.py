@@ -94,7 +94,7 @@ def search_query(query):
     The function builds a list of potential file paths based on the query letters.
     For queries with 4 or more characters (e.g., "chri"), it first tries:
       PASSLISTDATA / letter1 / letter2 / letter3 / letter4
-    Then fallen Fallbacks ein:
+    Then Fallbacks:
       - PASSLISTDATA / letter1 / letter2 / letter3
       - PASSLISTDATA / letter1 / letter2 / symbols
       - PASSLISTDATA / letter1 / letter2
@@ -113,12 +113,11 @@ def search_query(query):
     q_lower = query.lower()
     potential_paths = []
 
-    # Für Suchbegriffe mit 4 oder mehr Zeichen:
     if len(q_lower) >= 4:
         potential_paths.append(
             os.path.join(PASSLISTDATA, q_lower[0], q_lower[1], q_lower[2], q_lower[3])
         )
-    # Für Suchbegriffe mit 3 oder mehr Zeichen:
+
     if len(q_lower) >= 3:
         potential_paths.append(
             os.path.join(PASSLISTDATA, q_lower[0], q_lower[1], q_lower[2])
@@ -126,13 +125,13 @@ def search_query(query):
         potential_paths.append(
             os.path.join(PASSLISTDATA, q_lower[0], q_lower[1], "symbols")
         )
-    # Für Suchbegriffe mit 2 oder mehr Zeichen:
+
     if len(q_lower) >= 2:
         potential_paths.append(os.path.join(PASSLISTDATA, q_lower[0], q_lower[1]))
         potential_paths.append(os.path.join(PASSLISTDATA, q_lower[0], "symbols"))
-    # 1-Buchstaben-Ebene:
+
     potential_paths.append(os.path.join(PASSLISTDATA, q_lower[0]))
-    # Fallback im Root-Verzeichnis:
+
     potential_paths.append(os.path.join(PASSLISTDATA, "symbols"))
 
     candidate_file = None
