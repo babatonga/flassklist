@@ -88,7 +88,7 @@ The project includes a `compose.yaml` file that sets up the Flask app and Redis 
 2. **Build and run using Docker Compose:**
 
    ```bash
-   docker compose up --build
+   docker compose up
    ```
 
 3. **Access the application:**
