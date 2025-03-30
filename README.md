@@ -85,7 +85,7 @@ The project includes a `compose.yaml` file that sets up the Flask app and Redis 
             #- /path/to/tmpfs:/ramdiskdata # optional ramdisk for faster access (needs ~107GB RAM tmpfs!)
     ```
 
-2. **Build and run using Docker Compose:**
+2. **Run using Docker Compose:**
 
    ```bash
    docker compose up
