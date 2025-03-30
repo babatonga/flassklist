@@ -108,7 +108,7 @@ The project includes a `compose.yaml` file that sets up the Flask app and Redis 
   Defines the container image based on Python 3, sets the working directory to `/app`, copies the application files, installs dependencies, and uses `entrypoint.sh` to start the app.
 
 - **compose.yaml:**  
-  Sets up the services for Redis and the Flask application. Redis runs using the official Redis Alpine image, while the Flask app is built from the Dockerfile. Volumes are used to mount the data directory and optionally a RAM disk.
+  Sets up the services for Redis and the Flask application. Volumes are used to mount the data directory and optionally a RAM disk.
 
 - **start.sh:**  
   A script for local development. It sets up the necessary environment variables and starts the Flask app with Gunicorn.
