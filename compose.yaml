@@ -26,7 +26,7 @@ services:
       - COMB_USE_PROXY=True
       - COMB_REDIS_URL=redis://redis:6379
     volumes:
-      - /path/to/comb/data:/passlistdata
+      - /home/daniel/Downloads/passlists/CompilationOfManyBreaches/data:/passlistdata
       #- /path/to/tmpfs:/ramdiskdata # optional ramdisk (tmpfs) for faster access
     depends_on:
       - redis
