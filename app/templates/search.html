@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compilation Of Many Breaches</title>
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+  <!-- Bootstrap CDN for responsive layout -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+    }
+    .search-container {
+      margin: 50px auto;
+      padding: 20px;
+    }
+    .search-input {
+      background-color: #1e1e1e;
+      border: none;
+      color: #e0e0e0;
+    }
+    .search-input:focus {
+      background-color: #2c2c2c;
+      color: #fff;
+      box-shadow: none;
+    }
+    ::placeholder {
+      color: #bbb !important;
+    }
+    .btn-search {
+      background-color: #3a3a3a;
+      border: none;
+      color: #e0e0e0;
+    }
+    .btn-search:hover {
+      background-color: #555;
+    }
+    .result-entry {
+      background-color: #1e1e1e;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    .result-entry i {
+      margin-right: 8px;
+    }
+    .entry-password {
+      color: #ff9f43;
+      font-weight: bold;
+      background-color: rgba(255, 159, 67, 0.15);
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    .copy-buttons {
+      margin-top: 8px;
+    }
+    .btn-copy {
+      background-color: #3a3a3a;
+      border: none;
+      color: #e0e0e0;
+      margin-right: 5px;
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-size: 0.9rem;
+    }
+    .btn-copy:hover {
+      background-color: #555;
+    }
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #3a3a3a;
+      color: #e0e0e0;
+      border: none;
+      padding: 10px 12px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+      transition: background-color 0.3s;
+    }
+    #back-to-top:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="search-container container">
+    <h1 class="mb-4 text-center"><i class="fa-solid fa-magnifying-glass"></i> Search COMB</h1>
+    {% if error %}
+      <div class="alert alert-danger" role="alert">
+        <i class="fa-solid fa-exclamation-triangle"></i> {{ error }}
+      </div>
+    {% endif %}
+    {% if warning %}
+      <div class="alert alert-warning" role="alert">
+        <i class="fa-solid fa-exclamation-circle"></i> {{ warning }}
+      </div>
+    {% endif %}
+    <form method="POST" action="{{ url_for('search') }}">
+      <div class="input-group mb-3">
+        <input type="text" name="query" class="form-control search-input" placeholder="Username / Email (or part of it)" required {% if query %}value="{{ query }}"{% endif %}>
+        <button class="btn btn-search" type="submit">
+          <i class="fa-solid fa-key"></i> Search
+        </button>
+      </div>
+    </form>
+    {% if results %}
+      <h3 class="mt-4"><i class="fa-solid fa-lock"></i> Search Results for "{{ query }}" ({{ results|length }})</h3>
+      <div class="mt-3">
+        {% for entry in results %}
+          <div class="result-entry">
+            {% set parts = entry.split(":", 1) %}
+            <div>
+              <span class="entry-email"><i class="fa-solid fa-envelope"></i> {{ parts[0] }}</span>
+              <span class="entry-password"> {{ parts[1] if parts|length > 1 else '' }}</span>
+            </div>
+            <div class="copy-buttons">
+              <button class="btn btn-copy" data-copy="{{ parts[0] }}" title="Copy Email">
+                <i class="fa-solid fa-copy"></i> Copy Email
+              </button>
+              <button class="btn btn-copy" data-copy="{{ parts[1] if parts|length > 1 else '' }}" title="Copy Password">
+                <i class="fa-solid fa-key"></i> Copy Password
+              </button>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Back to Top Arrow -->
+  <button id="back-to-top" title="Back to Top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript for Copy Functionality -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const copyButtons = document.querySelectorAll('.btn-copy');
+      copyButtons.forEach(button => {
+        button.addEventListener("click", function() {
+          const textToCopy = this.getAttribute("data-copy");
+          if (!textToCopy) return;
+          navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+              const originalText = this.innerHTML;
+              this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+              setTimeout(() => {
+                this.innerHTML = originalText;
+              }, 1500);
+            })
+            .catch(err => {
+              console.error("Failed to copy text: ", err);
+            });
+        });
+      });
+
+      // Back-to-Top functionality
+      const backToTopBtn = document.getElementById('back-to-top');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+          backToTopBtn.style.display = "block";
+        } else {
+          backToTopBtn.style.display = "none";
+        }
+      });
+
+      backToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
