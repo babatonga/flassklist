@@ -16,7 +16,7 @@ You can find a magnet link for COMB here: https://gist.github.com/fawazahmed0/79
 - **Redis Caching:** Speeds up repeated searches.
 - **Optional RAM Disk:** Improves file access performance by utilizing a RAM disk.
 
-<img src="docs/comb.png" alt="Compilation Of Many Breaches Search" height="600">
+<img src="docs/comb.png" alt="Compilation Of Many Breaches Search" max-height="600">
 
 ---
 
