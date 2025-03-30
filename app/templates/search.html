@@ -105,7 +105,7 @@
     {% endif %}
     <form method="POST" action="{{ url_for('search') }}">
       <div class="input-group mb-3">
-        <input type="text" name="query" class="form-control search-input" placeholder="Username / Email (or part of it)" required {% if query %}value="{{ query }}"{% endif %}>
+        <input type="text" name="query" class="form-control search-input" placeholder="Username / Email" required {% if query %}value="{{ query }}"{% endif %}>
         <button class="btn btn-search" type="submit">
           <i class="fa-solid fa-key"></i> Search
         </button>
