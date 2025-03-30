@@ -74,6 +74,8 @@ Ensure you have Redis installed and running on your local machine.
 
 ### Running with Docker Compose
 
+Latest image: `ghcr.io/babatonga/flassklist:latest`
+
 The project includes a `compose.yaml` file that sets up the Flask app and Redis in separate containers.
 
 1. **Setup mounts of flassklist service in compose.yaml**

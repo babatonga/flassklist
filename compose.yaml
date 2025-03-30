@@ -13,10 +13,7 @@ services:
       - redis:/data
       
   flassklist:
-    image: flassklist
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/babatonga/flassklist:latest
     restart: unless-stopped
     ports:
       - 8080:8080
