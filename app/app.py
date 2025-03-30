@@ -211,7 +211,7 @@ def search():
                     results = search_query_with_timeout(query)
                     cache.set(cache_key, results, timeout=600)
                 search_duration = time.time() - search_time
-                app.logger.info(
+                app.logger.debug(
                     f"Search query: {query}, results: {len(results)}, duration: {search_duration:.2f}s"
                 )
                 if len(results) >= 100:
