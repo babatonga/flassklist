@@ -12,17 +12,22 @@ services:
     volumes:
       - redis:/data
       
-  flasklist:
-    image: registry.blackdan.de/flasklist:latest
+  flassklist:
+    image: flassklist
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
+    ports:
+      - 8080:8080
     environment:
       - PGID=1000
       - PUID=1000
       - COMB_USE_PROXY=True
       - COMB_REDIS_URL=redis://redis:6379
     volumes:
-      - /srv/comb/data:/passlistdata
-      #- /mnt/comb:/ramdiskdata # optional ramdisk (tmpfs) for faster access
+      - /path/to/comb/data:/passlistdata
+      #- /path/to/tmpfs:/ramdiskdata # optional ramdisk (tmpfs) for faster access
     depends_on:
       - redis
 
